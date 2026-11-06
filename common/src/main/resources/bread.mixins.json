@@ -1,0 +1,29 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "my.celium.org.bread.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "AbstractVillagerMixin",
+    "BlockStateBaseMixin",
+    "EntityMixin",
+    "ExperienceOrbMixin",
+    "FarmlandBlockMixin",
+    "ItemEntityMixin",
+    "SnowGolemMixin"
+  ],
+  "client": [
+    "client.BlockEntityRenderDispatcherMixin",
+    "client.CameraMixin",
+    "client.EntityRendererMixin",
+    "client.FramerateLimitTrackerMixin",
+    "client.ItemClusterRenderStateMixin",
+    "client.ItemFeatureRendererMixin",
+    "client.LivingEntityRendererMixin",
+    "client.MouseHandlerMixin",
+    "client.ParticleGroupMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
