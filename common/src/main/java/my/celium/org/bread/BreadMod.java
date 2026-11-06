@@ -18,7 +18,7 @@ public final class BreadMod {
 
     public static final ModMetadata META = ModMetadata.builder(ID, "Bread", "1.0.0")
             .author("MyCelium")
-            .website("https://wiki.mycelium-gg.org/bread/")
+            .website("https://www.curseforge.com/minecraft/mc-mods/bread-fps")
             .updateUrl("https://wiki.mycelium-gg.org/updates/bread.json")
             .build();
 
