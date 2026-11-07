@@ -6,7 +6,7 @@ Bread is versioned semantically (`MAJOR.MINOR.PATCH`).
 It runs on Minecraft 26.3, 26.2 and 26.1 (Fabric + Forge + NeoForge, Java 25) and requires
 [Mycel](https://github.com/MyCelium-GG/MyCel-Lib) (`my.celium.org`).
 
-## [1.1.0] - 2026-11-07
+## [1.1.1] - 2026-11-07
 
 ### Added
 - Name tags of far-away mobs are not drawn (past 32 blocks, players keep theirs): text is costly in farms full of named mobs.

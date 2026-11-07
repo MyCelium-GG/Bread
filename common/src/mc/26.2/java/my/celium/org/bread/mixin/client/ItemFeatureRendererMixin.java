@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-/** Far-away items are drawn flat, see {@link ItemLod}. */
+/** Far-away items are drawn flat, see {@link ItemLod}. 26.2 draws the glint in its own pass, prepareFoilSubmit. */
 @Mixin(ItemFeatureRenderer.class)
 public abstract class ItemFeatureRendererMixin {
     @Redirect(method = "prepareMainSubmit", at = @At(value = "INVOKE",
@@ -18,7 +18,7 @@ public abstract class ItemFeatureRendererMixin {
         return ItemLod.quads(submit.quads(), submit.pose().pose(), submit.displayContext());
     }
 
-    @Redirect(method = "prepareMainSubmit", at = @At(value = "INVOKE",
+    @Redirect(method = "prepareFoilSubmit", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/feature/ItemFeatureRenderer$Submit;foilType()Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;"))
     private ItemStackRenderState.FoilType bread$glint(ItemFeatureRenderer.Submit submit) {
         return ItemLod.foil(submit.foilType(), submit.pose().pose(), submit.displayContext());
