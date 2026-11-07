@@ -55,6 +55,7 @@ public final class BreadMod {
     // HUD (client side)
     public static ConfigValue<Boolean> fpsCounter;
     public static ConfigValue<String> fpsCounterCorner;
+    public static ConfigValue<Boolean> coordinates;
 
     // Zoom (client side)
     public static ConfigValue<Boolean> zoom;
@@ -126,6 +127,8 @@ public final class BreadMod {
         builder.category("hud");
         fpsCounter = builder.booleanValue("fps_counter", false,
                 "Show your FPS in a corner of the screen.");
+        coordinates = builder.booleanValue("coordinates", false,
+                "Show your coordinates, facing and biome under the FPS counter's corner.");
         fpsCounterCorner = builder.stringValue("fps_counter_corner", "top_left", 16,
                 "Where the FPS counter sits: top_left, top_right, bottom_left or bottom_right.");
 

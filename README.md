@@ -57,8 +57,9 @@ game logic, Bread the things standing in the world.
 
 - **Zoom**: hold **C** (change it in Controls), scroll to zoom further.
 - **FPS counter** in a corner of your choice, green, yellow or red.
+- **Coordinates**: position, facing and biome under it (`/bread coords`).
 - **/bread**: menu with buttons. `/bread info` shows what Bread skipped in the
-  last frame, `/bread fps`, `/bread on|off`, `/bread config`,
+  last frame, `/bread fps`, `/bread coords`, `/bread on|off`, `/bread config`,
   `/bread toggle <setting>`, `/bread set <setting> <number>`.
 
 ![Zoom: normal view and holding C](docs/img/zoom.png)
@@ -100,6 +101,7 @@ in your own game. Details: https://wiki.mycelium-gg.org/privacy#stats-bread
 | `performance.item_merge_radius` | `1.5` | Server: item merge distance (vanilla 0.5). 0 = vanilla. |
 | `performance.xp_merge_radius` | `2.0` | Server: XP orb merge distance (vanilla 0.5). 0 = vanilla. |
 | `hud.fps_counter` | `false` | Show the FPS counter. |
+| `hud.coordinates` | `false` | Show coordinates, facing and biome. |
 | `hud.fps_counter_corner` | `top_left` | `top_left`, `top_right`, `bottom_left`, `bottom_right`. |
 | `zoom.zoom` | `true` | Zoom while holding the key. |
 | `zoom.zoom_level` | `4` | How many times closer the zoom starts. |

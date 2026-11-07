@@ -47,6 +47,10 @@ public final class BreadCommand {
                     BreadMod.fpsCounter.set(!BreadMod.fpsCounter.get());
                     return say(VOICE.ok("FPS counter ", state(BreadMod.fpsCounter.get()), "."));
                 }))
+                .then(LiteralArgumentBuilder.<S>literal("coords").executes(c -> {
+                    BreadMod.coordinates.set(!BreadMod.coordinates.get());
+                    return say(VOICE.ok("Coordinates ", state(BreadMod.coordinates.get()), "."));
+                }))
                 .then(LiteralArgumentBuilder.<S>literal("on").executes(c -> master(true)))
                 .then(LiteralArgumentBuilder.<S>literal("off").executes(c -> master(false)))
                 .then(LiteralArgumentBuilder.<S>literal("config").executes(c -> {
@@ -88,6 +92,7 @@ public final class BreadCommand {
                 TextUtil.button(on ? "Turn off" : "Turn on", on ? "/bread off" : "/bread on", "Master switch for every Bread feature"),
                 "  ", TextUtil.button("Info", "/bread info", "See what Bread is skipping right now"),
                 "  ", TextUtil.button("FPS counter", "/bread fps", "Show or hide the FPS counter"),
+                "  ", TextUtil.button("Coords", "/bread coords", "Show or hide your coordinates, facing and biome"),
                 "  ", TextUtil.button("Settings", "/bread config", "Open the Bread settings"),
                 "  ", TextUtil.suggest("Toggle", "/bread toggle ", "Flip one setting: /bread toggle <setting>"),
                 "  ", TextUtil.suggest("Set", "/bread set ", "Set a number: /bread set <setting> <number>, 0 = vanilla")));

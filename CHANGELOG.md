@@ -11,7 +11,8 @@ It runs on Minecraft 26.3, 26.2 and 26.1 (Fabric + Forge + NeoForge, Java 25) an
 ### Added
 - Name tags of far-away mobs are not drawn (past 32 blocks, players keep theirs): text is costly in farms full of named mobs.
 - The enchantment shimmer on far-away items and in item frames is skipped (past 24 blocks), one draw pass less per item.
-- Both are new settings (`name_tag_distance`, `glint_distance`, 0 = vanilla), stretch while zooming and show up in `/bread info`.
+- Coordinates overlay: your position, facing and biome in the FPS counter's corner. Turn it on with `/bread coords` or the Coords button in `/bread`.
+- Both distances are new settings (`name_tag_distance`, `glint_distance`, 0 = vanilla), stretch while zooming and show up in `/bread info`.
 
 ## [1.0.0] - 2026-11-06
 

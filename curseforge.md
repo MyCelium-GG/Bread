@@ -16,7 +16,7 @@ Measured, not guessed: Bread off and on in the same run, averaged over 40 second
 ![The same base from behind a wall: 19 FPS without Bread, 170 with](https://wiki.mycelium-gg.org/bread/img/compare-wall.png)
 
 ## Zoom and FPS counter
-Hold **C** to zoom and scroll to zoom further. Turn on the FPS counter with **/bread fps**.
+Hold **C** to zoom and scroll to zoom further. Turn on the FPS counter with **/bread fps**, and your coordinates, facing and biome with **/bread coords**.
 
 ![Zoom: normal view and holding C](https://wiki.mycelium-gg.org/bread/img/zoom.png)
 
