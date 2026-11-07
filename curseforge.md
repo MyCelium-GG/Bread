@@ -6,7 +6,7 @@
 
 ## More FPS in busy places
 - **Hidden behind walls**: mobs, chests, signs and item frames you cannot see are not drawn. Nothing flickers when you walk around a corner.
-- **Far detail**: far-away item frames, signs and dropped items are skipped, far mobs skip their armor, piles of dropped items become one item and items are drawn flat. Zoom in and everything keeps its detail.
+- **Far detail**: far-away item frames, signs and dropped items are skipped, far mobs skip their armor, piles of dropped items become one item, items are drawn flat, and far mob name tags and enchantment shimmer are skipped. Zoom in and everything keeps its detail.
 - **Fewer particles** at once, **lighter dropped items**, items and XP orbs that **merge from farther apart**, and **30 FPS while the game is in the background**.
 
 ![Benchmark: busy base 36 to 114 FPS (3.1x), behind a wall 36 to 314 FPS (8.8x)](https://wiki.mycelium-gg.org/bread/img/benchmark.png)

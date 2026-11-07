@@ -16,7 +16,7 @@ import my.celium.org.metadata.ModMetadata;
 public final class BreadMod {
     public static final String ID = "bread";
 
-    public static final ModMetadata META = ModMetadata.builder(ID, "Bread", "1.0.0")
+    public static final ModMetadata META = ModMetadata.builder(ID, "Bread", "1.1.0")
             .author("MyCelium")
             .website("https://www.curseforge.com/minecraft/mc-mods/bread-fps")
             .updateUrl("https://wiki.mycelium-gg.org/updates/bread.json")
@@ -44,6 +44,8 @@ public final class BreadMod {
     public static ConfigValue<Integer> maxParticles;
     public static ConfigValue<Integer> flatItemDistance;
     public static ConfigValue<Boolean> fastDroppedItems;
+    public static ConfigValue<Integer> nameTagDistance;
+    public static ConfigValue<Integer> glintDistance;
     public static ConfigValue<Boolean> hideUnseen;
 
     // Performance (server side)
@@ -110,6 +112,10 @@ public final class BreadMod {
                 "Most particles of one kind at once (vanilla allows 16384). 0 = vanilla.");
         flatItemDistance = builder.intValue("flat_item_distance", 20, 0, 512,
                 "Blocks away to draw dropped and framed items flat, without their pixel edges. 0 = vanilla.");
+        nameTagDistance = builder.intValue("name_tag_distance", 32, 0, 512,
+                "Blocks away to stop drawing name tags of mobs (not players). 0 = vanilla.");
+        glintDistance = builder.intValue("glint_distance", 24, 0, 512,
+                "Blocks away to stop drawing the enchantment shimmer on items. 0 = vanilla.");
         fastDroppedItems = builder.booleanValue("fast_dropped_items", true,
                 "Your game skips entity collision checks for dropped items and XP orbs (the server still does them).");
         itemMergeRadius = builder.doubleValue("item_merge_radius", 1.5, 0.0, 8.0,

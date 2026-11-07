@@ -5,6 +5,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import my.celium.org.bread.BreadMod;
+import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -53,6 +54,20 @@ public final class ItemLod {
             BreadInfo.flatItem(quads.size() - flat.size());
         }
         return flat;
+    }
+
+    /** No enchantment shimmer on items in the world past {@code glint_distance}. */
+    public static ItemStackRenderState.FoilType foil(ItemStackRenderState.FoilType type, Matrix4fc pose, ItemDisplayContext context) {
+        if (type == ItemStackRenderState.FoilType.NONE || context == ItemDisplayContext.GUI || context.firstPerson()) {
+            return type;
+        }
+        int limit = RenderCulling.lod(BreadMod.glintDistance);
+        float x = pose.m30(), y = pose.m31(), z = pose.m32();
+        if (limit <= 0 || x * x + y * y + z * z <= (float) limit * limit) {
+            return type;
+        }
+        BreadInfo.glint();
+        return ItemStackRenderState.FoilType.NONE;
     }
 
     private static List<BakedQuad> flatten(List<BakedQuad> quads) {

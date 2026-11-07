@@ -27,7 +27,8 @@ core for the MyCelium ecosystem.
 - **Far detail**: past a set distance, item frames, paintings and armor stands
   (64 blocks), dropped items (48), signs, banners and heads (32) are not drawn,
   mobs skip armor and held items (32), dropped stacks are one item instead of a
-  pile (16) and items in frames or on the ground are drawn flat (20). Zooming
+  pile (16), items in frames or on the ground are drawn flat (20), mob name tags
+  stop at 32 blocks and the enchantment shimmer on items at 24. Zooming
   stretches all of these, so what you zoom in on keeps its detail.
 - **Particles**: at most 4,000 of one kind instead of 16,384.
 - **Dropped items**: your game skips their entity collision checks (the server
@@ -91,6 +92,8 @@ in your own game. Details: https://wiki.mycelium-gg.org/privacy#stats-bread
 | `performance.far_mob_detail_distance` | `32` | Mobs drop armor and held items past this. 0 = vanilla. |
 | `performance.item_pile_distance` | `16` | Dropped stacks drawn as one item past this. 0 = vanilla. |
 | `performance.flat_item_distance` | `20` | Items drawn without pixel edges past this. 0 = vanilla. |
+| `performance.name_tag_distance` | `32` | Mob name tags past this are not drawn (players keep theirs). 0 = vanilla. |
+| `performance.glint_distance` | `24` | No enchantment shimmer on items past this. 0 = vanilla. |
 | `performance.max_particles` | `4000` | Most particles of one kind. 0 = vanilla (16384). |
 | `performance.fast_dropped_items` | `true` | Client skips entity collision checks for items and orbs. |
 | `performance.background_fps` | `30` | FPS limit while not focused. 0 = no limit. |

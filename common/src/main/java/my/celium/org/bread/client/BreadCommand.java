@@ -109,6 +109,8 @@ public final class BreadCommand {
         say(row("Flat items", n(s.flatItems), n(s.facesSaved) + " faces saved"));
         say(row("Mobs, no armor drawn", n(s.mobLayersSkipped), null));
         say(row("Piles drawn as one", n(s.pilesSimplified), null));
+        say(row("Name tags hidden", n(s.nameTags), null));
+        say(row("Glints skipped", n(s.glints), null));
         say(row("Particles held back", n(s.particlesBlocked) + "/s", null));
         say(row("Physics checks skipped", n(s.collisionChecksSkipped) + "/s", null));
         return 1;

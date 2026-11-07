@@ -10,7 +10,7 @@ public final class BreadInfo {
     // Per frame
     static int entities, entitiesFar, entitiesHidden;
     static int blockEntities, blockEntitiesFar, blockEntitiesHidden;
-    static int flatItems, facesSaved, mobLayersSkipped, pilesSimplified;
+    static int flatItems, facesSaved, mobLayersSkipped, pilesSimplified, nameTags, glints;
     // Per second (particles and physics run per tick, not per frame)
     static int particlesBlocked, collisionChecksSkipped;
 
@@ -18,7 +18,7 @@ public final class BreadInfo {
     public static final class Snapshot {
         public int entities, entitiesFar, entitiesHidden;
         public int blockEntities, blockEntitiesFar, blockEntitiesHidden;
-        public int flatItems, facesSaved, mobLayersSkipped, pilesSimplified;
+        public int flatItems, facesSaved, mobLayersSkipped, pilesSimplified, nameTags, glints;
         public int particlesBlocked, collisionChecksSkipped;
     }
 
@@ -34,10 +34,10 @@ public final class BreadInfo {
         Snapshot s = LAST;
         s.entities = entities; s.entitiesFar = entitiesFar; s.entitiesHidden = entitiesHidden;
         s.blockEntities = blockEntities; s.blockEntitiesFar = blockEntitiesFar; s.blockEntitiesHidden = blockEntitiesHidden;
-        s.flatItems = flatItems; s.facesSaved = facesSaved; s.mobLayersSkipped = mobLayersSkipped; s.pilesSimplified = pilesSimplified;
+        s.flatItems = flatItems; s.facesSaved = facesSaved; s.mobLayersSkipped = mobLayersSkipped; s.pilesSimplified = pilesSimplified; s.nameTags = nameTags; s.glints = glints;
         entities = entitiesFar = entitiesHidden = 0;
         blockEntities = blockEntitiesFar = blockEntitiesHidden = 0;
-        flatItems = facesSaved = mobLayersSkipped = pilesSimplified = 0;
+        flatItems = facesSaved = mobLayersSkipped = pilesSimplified = nameTags = glints = 0;
         long now = System.currentTimeMillis();
         if (now - secondStart >= 1000) {
             s.particlesBlocked = particlesBlocked;
@@ -54,6 +54,14 @@ public final class BreadInfo {
 
     public static void mobLayers() {
         mobLayersSkipped++;
+    }
+
+    public static void glint() {
+        glints++;
+    }
+
+    public static void nameTag() {
+        nameTags++;
     }
 
     public static void pile() {

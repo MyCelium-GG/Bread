@@ -21,6 +21,7 @@
     "client.ItemFeatureRendererMixin",
     "client.LivingEntityRendererMixin",
     "client.MouseHandlerMixin",
+    "client.NameTagMixin",
     "client.ParticleGroupMixin"
   ],
   "injectors": {
