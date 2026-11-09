@@ -13,6 +13,8 @@
   <a href="https://github.com/MyCelium-GG/Bread/blob/main/LICENSE"><img src="https://img.shields.io/github/license/MyCelium-GG/Bread?style=flat-square&color=F2C14E" alt="MIT license"></a>
 </p>
 
+<a href="https://www.curseforge.com/minecraft/mc-mods/mycel"><img src="https://raw.githubusercontent.com/MyCelium-GG/Bread/0c03f8b18201/docs/img/banners/mycel-required.svg" alt="Mycel is required: this mod needs the Mycel library to run. Install Mycel next to it, for the same Minecraft version and loader. Download it from CurseForge." width="100%"></a>
+
 ![About the mod](https://raw.githubusercontent.com/MyCelium-GG/Bread/4724b741902a/docs/img/banners/about-the-mod.svg)
 
 ![Bread off: 19 FPS, Bread on: 67 FPS in a busy base. Bread skips drawing what you cannot see or would not notice: mobs, chests and item frames behind walls, details on far-away things, piles of dropped items. In a busy base that is about 3x the FPS. It also adds zoom, an FPS counter, right-click harvesting, double doors and more. Every feature can be switched off.](https://raw.githubusercontent.com/MyCelium-GG/Bread/4724b741902a/docs/img/banners/about.svg)
