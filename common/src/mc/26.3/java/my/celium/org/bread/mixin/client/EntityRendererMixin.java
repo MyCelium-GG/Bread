@@ -15,6 +15,9 @@ public abstract class EntityRendererMixin<T extends Entity> {
     @Inject(method = "shouldRender", at = @At("HEAD"), cancellable = true)
     private void bread$cullFar(T entity, Frustum culler, double camX, double camY, double camZ, float partialTicks,
                                CallbackInfoReturnable<Boolean> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         if (RenderCulling.skip(entity, camX, camY, camZ)) {
             cir.setReturnValue(false);
         }

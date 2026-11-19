@@ -16,6 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class FramerateLimitTrackerMixin {
     @Inject(method = "getFramerateLimit", at = @At("RETURN"), cancellable = true)
     private void bread$backgroundLimit(CallbackInfoReturnable<Integer> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         int limit = BreadMod.distance(BreadMod.backgroundFps);
         if (limit > 0 && cir.getReturnValueI() > limit && !Minecraft.getInstance().getWindow().isFocused()) {
             cir.setReturnValue(limit);

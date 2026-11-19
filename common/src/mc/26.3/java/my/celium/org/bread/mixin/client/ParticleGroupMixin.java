@@ -18,6 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ParticleGroupMixin {
     @Inject(method = "add", at = @At("HEAD"), cancellable = true)
     private void bread$cap(Particle particle, CallbackInfoReturnable<Boolean> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         int cap = BreadMod.distance(BreadMod.maxParticles);
         if (cap > 0 && ((ParticleGroup<?>) (Object) this).size() >= cap && particle.getParticleLimit().isEmpty()) {
             BreadInfo.particle();

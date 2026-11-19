@@ -54,13 +54,16 @@ public final class FpsCounter {
     }
 
     private static String facing(net.minecraft.core.Direction dir) {
-        String n = dir.getName();
-        return Character.toUpperCase(n.charAt(0)) + n.substring(1);
+        return net.minecraft.client.resources.language.I18n.get("bread.dir." + dir.getName());
     }
 
     /** "Dark Forest" from minecraft:dark_forest; modded biomes keep their path the same way. */
     private static String biome(Minecraft mc, net.minecraft.core.BlockPos pos) {
         return mc.level.getBiome(pos).unwrapKey().map(key -> {
+            String translated = "biome." + key.identifier().getNamespace() + "." + key.identifier().getPath();
+            if (net.minecraft.locale.Language.getInstance().has(translated)) {
+                return net.minecraft.client.resources.language.I18n.get(translated);
+            }
             StringBuilder out = new StringBuilder();
             for (String part : key.identifier().getPath().split("_")) {
                 if (!part.isEmpty()) {

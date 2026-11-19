@@ -16,12 +16,18 @@ public abstract class ItemFeatureRendererMixin {
     @Redirect(method = "renderItem", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/SubmitNodeStorage$ItemSubmit;quads()Ljava/util/List;"))
     private List<BakedQuad> bread$lod(SubmitNodeStorage.ItemSubmit submit) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return submit.quads();
+        }
         return ItemLod.quads(submit.quads(), submit.pose().pose(), submit.displayContext());
     }
 
     @Redirect(method = "renderItem", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/SubmitNodeStorage$ItemSubmit;foilType()Lnet/minecraft/client/renderer/item/ItemStackRenderState$FoilType;"))
     private ItemStackRenderState.FoilType bread$glint(SubmitNodeStorage.ItemSubmit submit) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return submit.foilType();
+        }
         return ItemLod.foil(submit.foilType(), submit.pose().pose(), submit.displayContext());
     }
 }

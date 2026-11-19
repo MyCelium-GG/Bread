@@ -14,6 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class CameraMixin {
     @Inject(method = "calculateFov", at = @At("RETURN"), cancellable = true)
     private void bread$zoom(float partialTicks, CallbackInfoReturnable<Float> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         BreadStats.fps = Minecraft.getInstance().getFps();
         my.celium.org.bread.client.BreadInfo.frame();
         float multiplier = Zoom.fovMultiplier();

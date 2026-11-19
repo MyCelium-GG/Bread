@@ -14,6 +14,17 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 @Mod(BreadMod.ID)
 public final class BreadNeoForge {
     public BreadNeoForge(@SuppressWarnings("unused") IEventBus modBus, @SuppressWarnings("unused") ModContainer container) {
+        if (!net.neoforged.fml.ModList.get().isLoaded("mycel")) {
+            my.celium.org.bread.MissingMycel.logOnce();
+            net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(
+                    (net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) -> {
+                if (event.getEntity() instanceof net.minecraft.server.level.ServerPlayer player) {
+                    my.celium.org.bread.MissingMycel.tell(player);
+                }
+            });
+            return;
+        }
+        my.celium.org.bread.ModGate.open();
         BreadMod.init();
         if (FMLEnvironment.getDist().isClient()) {
             ModLoadingContext.get().registerExtensionPoint(IConfigScreenFactory.class,

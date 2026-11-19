@@ -45,11 +45,11 @@ public final class BreadCommand {
                 .then(LiteralArgumentBuilder.<S>literal("info").executes(c -> info()))
                 .then(LiteralArgumentBuilder.<S>literal("fps").executes(c -> {
                     BreadMod.fpsCounter.set(!BreadMod.fpsCounter.get());
-                    return say(VOICE.ok("FPS counter ", state(BreadMod.fpsCounter.get()), "."));
+                    return say(VOICE.ok(t("cmd.fps", state(BreadMod.fpsCounter.get()))));
                 }))
                 .then(LiteralArgumentBuilder.<S>literal("coords").executes(c -> {
                     BreadMod.coordinates.set(!BreadMod.coordinates.get());
-                    return say(VOICE.ok("Coordinates ", state(BreadMod.coordinates.get()), "."));
+                    return say(VOICE.ok(t("cmd.coords", state(BreadMod.coordinates.get()))));
                 }))
                 .then(LiteralArgumentBuilder.<S>literal("on").executes(c -> master(true)))
                 .then(LiteralArgumentBuilder.<S>literal("off").executes(c -> master(false)))
@@ -87,15 +87,15 @@ public final class BreadCommand {
     private static int status() {
         BreadStats.used("command");
         boolean on = BreadMod.isModEnabled();
-        say(VOICE.header("Bread " + BreadMod.META.version(), (on ? "on" : "off") + " · " + Minecraft.getInstance().getFps() + " FPS"));
+        say(VOICE.header("Bread " + BreadMod.META.version(), s(on ? "on" : "off") + " · " + Minecraft.getInstance().getFps() + " FPS"));
         say(TextUtil.msg(TextUtil.faint("  "),
-                TextUtil.button(on ? "Turn off" : "Turn on", on ? "/bread off" : "/bread on", "Master switch for every Bread feature"),
-                "  ", TextUtil.button("Info", "/bread info", "See what Bread is skipping right now"),
-                "  ", TextUtil.button("FPS counter", "/bread fps", "Show or hide the FPS counter"),
-                "  ", TextUtil.button("Coords", "/bread coords", "Show or hide your coordinates, facing and biome"),
-                "  ", TextUtil.button("Settings", "/bread config", "Open the Bread settings"),
-                "  ", TextUtil.suggest("Toggle", "/bread toggle ", "Flip one setting: /bread toggle <setting>"),
-                "  ", TextUtil.suggest("Set", "/bread set ", "Set a number: /bread set <setting> <number>, 0 = vanilla")));
+                TextUtil.button(s(on ? "cmd.turn_off" : "cmd.turn_on"), on ? "/bread off" : "/bread on", s("cmd.master.tip")),
+                "  ", TextUtil.button(s("cmd.info"), "/bread info", s("cmd.info.tip")),
+                "  ", TextUtil.button(s("cmd.fps_button"), "/bread fps", s("cmd.fps.tip")),
+                "  ", TextUtil.button(s("cmd.coords_button"), "/bread coords", s("cmd.coords.tip")),
+                "  ", TextUtil.button(s("cmd.settings"), "/bread config", s("cmd.settings.tip")),
+                "  ", TextUtil.suggest(s("cmd.toggle"), "/bread toggle ", s("cmd.toggle.tip")),
+                "  ", TextUtil.suggest(s("cmd.set"), "/bread set ", s("cmd.set.tip"))));
         return 1;
     }
 
@@ -103,27 +103,27 @@ public final class BreadCommand {
     private static int info() {
         BreadStats.used("info");
         if (!BreadMod.isModEnabled()) {
-            return say(VOICE.caution("Bread is ", state(false), ", so it is not skipping anything right now."));
+            return say(VOICE.caution(t("info.off", state(false))));
         }
         BreadInfo.Snapshot s = BreadInfo.LAST;
-        say(VOICE.header("Bread info", Minecraft.getInstance().getFps() + " FPS · last frame"));
+        say(VOICE.header(s("info.title"), s("info.subtitle", Minecraft.getInstance().getFps())));
         int entitySkipped = s.entitiesFar + s.entitiesHidden;
         int blockSkipped = s.blockEntitiesFar + s.blockEntitiesHidden;
-        say(line("Entities", entitySkipped, s.entities, n(s.entitiesHidden) + " walls, " + n(s.entitiesFar) + " far"));
-        say(line("Chests, signs", blockSkipped, s.blockEntities, n(s.blockEntitiesHidden) + " walls, " + n(s.blockEntitiesFar) + " far"));
-        say(row("Flat items", n(s.flatItems), n(s.facesSaved) + " faces saved"));
-        say(row("Mobs, no armor drawn", n(s.mobLayersSkipped), null));
-        say(row("Piles drawn as one", n(s.pilesSimplified), null));
-        say(row("Name tags hidden", n(s.nameTags), null));
-        say(row("Glints skipped", n(s.glints), null));
-        say(row("Particles held back", n(s.particlesBlocked) + "/s", null));
-        say(row("Physics checks skipped", n(s.collisionChecksSkipped) + "/s", null));
+        say(line(s("info.entities"), entitySkipped, s.entities, s("info.walls_far", n(s.entitiesHidden), n(s.entitiesFar))));
+        say(line(s("info.block_entities"), blockSkipped, s.blockEntities, s("info.walls_far", n(s.blockEntitiesHidden), n(s.blockEntitiesFar))));
+        say(row(s("info.flat_items"), n(s.flatItems), s("info.faces_saved", n(s.facesSaved))));
+        say(row(s("info.mob_layers"), n(s.mobLayersSkipped), null));
+        say(row(s("info.piles"), n(s.pilesSimplified), null));
+        say(row(s("info.name_tags"), n(s.nameTags), null));
+        say(row(s("info.glints"), n(s.glints), null));
+        say(row(s("info.particles"), n(s.particlesBlocked) + "/s", null));
+        say(row(s("info.physics"), n(s.collisionChecksSkipped) + "/s", null));
         return 1;
     }
 
     private static Component line(String label, int skipped, int total, String detail) {
         int percent = total == 0 ? 0 : Math.round(skipped * 100f / total);
-        return row(label, n(skipped) + "/" + n(total) + " skipped (" + percent + "%)", detail);
+        return row(label, s("info.skipped", n(skipped) + "/" + n(total), percent), detail);
     }
 
     private static String n(int value) {
@@ -140,19 +140,19 @@ public final class BreadCommand {
 
     private static int master(boolean on) {
         BreadMod.enabled.set(on);
-        return say(on ? VOICE.ok("Bread is ", state(true), ". Every feature uses its own setting again.")
-                : VOICE.caution("Bread is ", state(false), ". Everything runs like vanilla until you turn it back on."));
+        return say(on ? VOICE.ok(t("master.on", state(true)))
+                : VOICE.caution(t("master.off", state(false))));
     }
 
     @SuppressWarnings("unchecked")
     private static <S> int toggle(CommandContext<S> c) {
         ConfigValue<?> v = find(StringArgumentType.getString(c, "setting"));
         if (v == null || !(v.get() instanceof Boolean)) {
-            return say(VOICE.fail("There is no on/off setting called ", TextUtil.infoText(StringArgumentType.getString(c, "setting")), "."));
+            return say(VOICE.fail(t("cmd.no_toggle", TextUtil.infoText(StringArgumentType.getString(c, "setting")))));
         }
         ConfigValue<Boolean> b = (ConfigValue<Boolean>) v;
         b.set(!b.get());
-        return say(VOICE.ok(TextUtil.infoText(label(v)), " ", state(b.get()), "."));
+        return say(VOICE.ok(t("cmd.toggled", TextUtil.infoText(label(v)), state(b.get()))));
     }
 
     @SuppressWarnings("unchecked")
@@ -166,12 +166,12 @@ public final class BreadCommand {
             } else if (v != null && v.get() instanceof Double) {
                 ((ConfigValue<Double>) v).set(value);
             } else {
-                return say(VOICE.fail("There is no number setting called ", TextUtil.infoText(key), "."));
+                return say(VOICE.fail(t("cmd.no_number", TextUtil.infoText(key))));
             }
         } catch (IllegalArgumentException e) {
-            return say(VOICE.fail(TextUtil.infoText(value + ""), " is out of range for ", TextUtil.infoText(label(v)), "."));
+            return say(VOICE.fail(t("cmd.out_of_range", TextUtil.infoText(value + ""), TextUtil.infoText(label(v)))));
         }
-        return say(VOICE.ok(TextUtil.infoText(label(v)), " is now ", TextUtil.infoText(String.valueOf(v.get())), "."));
+        return say(VOICE.ok(t("cmd.now", TextUtil.infoText(label(v)), TextUtil.infoText(String.valueOf(v.get())))));
     }
 
     private static ConfigValue<?> find(String key) {
@@ -185,11 +185,31 @@ public final class BreadCommand {
     }
 
     private static MutableComponent state(boolean on) {
-        return on ? TextUtil.success("on") : TextUtil.error("off");
+        return on ? TextUtil.success(s("on")) : TextUtil.error(s("off"));
     }
 
+    /** The setting's name in the game's language (the same text as in the settings screen). */
     private static String label(ConfigValue<?> v) {
-        return v.key().replace('_', ' ');
+        String key = "bread.config." + v.key();
+        return net.minecraft.locale.Language.getInstance().has(key) ? s("config." + v.key()) : v.key().replace('_', ' ');
+    }
+
+    private static String s(String path, Object... args) {
+        return net.minecraft.client.resources.language.I18n.get("bread." + path, args);
+    }
+
+    /** A message whose {@code %s} slots keep the style of component arguments. */
+    private static MutableComponent t(String path, Object... args) {
+        return my.celium.org.translation.ModLang.component(s(path, keep(args)), args);
+    }
+
+    /** Leaves %s in place so {@link #t} can fill them with styled components. */
+    private static Object[] keep(Object[] args) {
+        Object[] out = new Object[args.length];
+        for (int i = 0; i < args.length; i++) {
+            out[i] = "%" + (i + 1) + "$s";
+        }
+        return out;
     }
 
     private static int say(Component text) {

@@ -13,6 +13,9 @@ public abstract class ExperienceOrbMixin {
     @Redirect(method = "scanForMerges", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/world/phys/AABB;inflate(D)Lnet/minecraft/world/phys/AABB;"))
     private AABB bread$mergeRadius(AABB box, double amount) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return box.inflate(amount);
+        }
         double radius = BreadMod.radius(BreadMod.xpMergeRadius);
         return box.inflate(radius > 0 ? radius : amount);
     }

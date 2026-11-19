@@ -20,6 +20,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class FarmlandBlockMixin {
     @Inject(method = "turnToBaseBlock", at = @At("HEAD"), cancellable = true)
     private void bread$keepFarmland(@Nullable Entity source, BlockState state, Level level, BlockPos pos, CallbackInfo ci) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         if (source instanceof LivingEntity living && BreadMod.on(BreadMod.featherFallingSavesCrops)) {
             for (var entry : living.getItemBySlot(EquipmentSlot.FEET).getEnchantments().entrySet()) {
                 if (entry.getKey().is(Enchantments.FEATHER_FALLING) && entry.getIntValue() > 0) {

@@ -37,4 +37,6 @@ Hold **C** to zoom and scroll to zoom further. Turn on the FPS counter with **/b
 
 The performance features, zoom and FPS counter work on any server. The tweaks need Bread on the server or in singleplayer.
 
+In 11 languages: English, German, Spanish, French, Dutch, Brazilian Portuguese, Russian, Polish, Italian, Japanese and Simplified Chinese.
+
 Requires [Mycel](https://www.curseforge.com/minecraft/mc-mods/mycel). Fabric, Forge and NeoForge, Minecraft 26.1 to 26.3. [Wiki](https://wiki.mycelium-gg.org/bread/) · [Discord](https://discord.gg/UvQNsKWMp3)

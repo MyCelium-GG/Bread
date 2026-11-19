@@ -23,6 +23,9 @@ public abstract class EntityMixin {
     @Redirect(method = "collide", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/world/level/Level;getEntityCollisions(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/phys/AABB;)Ljava/util/List;"))
     private List<VoxelShape> bread$skipEntityCollisions(Level level, Entity entity, AABB box) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return level.getEntityCollisions(entity, box);
+        }
         if (level.isClientSide() && (entity instanceof ItemEntity || entity instanceof ExperienceOrb)
                 && BreadMod.onFast(BreadMod.fastDroppedItems)) {
             my.celium.org.bread.client.BreadInfo.collision();

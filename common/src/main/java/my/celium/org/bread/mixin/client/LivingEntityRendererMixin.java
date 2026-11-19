@@ -18,6 +18,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class LivingEntityRendererMixin<S extends LivingEntityRenderState> {
     @Inject(method = "shouldRenderLayers", at = @At("RETURN"), cancellable = true)
     private void bread$farMobDetail(S state, CallbackInfoReturnable<Boolean> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         int limit = my.celium.org.bread.client.RenderCulling.lod(BreadMod.farMobDetailDistance);
         if (limit > 0 && cir.getReturnValueZ() && state.distanceToCameraSq > (double) limit * limit) {
             cir.setReturnValue(false);

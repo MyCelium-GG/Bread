@@ -20,6 +20,9 @@ public abstract class BlockEntityRenderDispatcherMixin {
     @Redirect(method = "tryExtractRenderState*", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderer;shouldRender(Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/minecraft/world/phys/Vec3;)Z"))
     private boolean bread$shouldRender(BlockEntityRenderer renderer, BlockEntity blockEntity, Vec3 camera) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return renderer.shouldRender(blockEntity, camera);
+        }
         return renderer.shouldRender(blockEntity, camera)
                 && !RenderCulling.skip(blockEntity, camera, renderer.shouldRenderOffScreen());
     }

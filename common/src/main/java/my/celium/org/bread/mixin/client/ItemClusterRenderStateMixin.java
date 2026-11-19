@@ -24,6 +24,9 @@ public abstract class ItemClusterRenderStateMixin {
 
     @Inject(method = "extractItemGroupRenderState", at = @At("RETURN"))
     private void bread$onePerPile(Entity entity, ItemStack stack, ItemModelResolver resolver, CallbackInfo ci) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         int limit = my.celium.org.bread.client.RenderCulling.lod(BreadMod.itemPileDistance);
         if (limit > 0 && count > 1
                 && Minecraft.getInstance().getEntityRenderDispatcher().distanceToSqr(entity) > (double) limit * limit) {

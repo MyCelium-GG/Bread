@@ -18,6 +18,9 @@ public abstract class MouseHandlerMixin {
 
     @Inject(method = "onScroll", at = @At("HEAD"), cancellable = true)
     private void bread$zoomScroll(long window, double xOffset, double yOffset, CallbackInfo ci) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         if (Zoom.scroll(yOffset)) {
             ci.cancel();
         }
@@ -25,6 +28,9 @@ public abstract class MouseHandlerMixin {
 
     @Inject(method = "turnPlayer", at = @At("HEAD"))
     private void bread$zoomSensitivity(double movementTime, CallbackInfo ci) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         double scale = Zoom.mouseScale();
         if (scale < 1.0) {
             accumulatedDX *= scale;

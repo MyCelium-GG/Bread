@@ -13,6 +13,9 @@ public abstract class ItemEntityMixin {
     @Redirect(method = "mergeWithNeighbours", at = @At(value = "INVOKE",
             target = "Lnet/minecraft/world/phys/AABB;inflate(DDD)Lnet/minecraft/world/phys/AABB;"))
     private AABB bread$mergeRadius(AABB box, double x, double y, double z) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return box.inflate(x, y, z);
+        }
         double radius = BreadMod.radius(BreadMod.itemMergeRadius);
         return radius > 0 ? box.inflate(radius, y, radius) : box.inflate(x, y, z);
     }

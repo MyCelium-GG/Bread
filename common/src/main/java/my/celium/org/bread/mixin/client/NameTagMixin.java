@@ -16,6 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class NameTagMixin<T extends Entity> {
     @Inject(method = "shouldShowName", at = @At("RETURN"), cancellable = true)
     private void bread$farNameTag(T entity, double distanceToCameraSq, CallbackInfoReturnable<Boolean> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         if (!cir.getReturnValueZ() || entity instanceof Player) {
             return;
         }

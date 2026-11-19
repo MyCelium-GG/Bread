@@ -25,6 +25,9 @@ public abstract class BlockStateBaseMixin {
     @Inject(method = "useItemOn", at = @At("HEAD"), cancellable = true)
     private void bread$useItemOn(ItemStack stack, Level level, Player player, InteractionHand hand, BlockHitResult hit,
                                  CallbackInfoReturnable<InteractionResult> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         InteractionResult result = BlockTweaks.useItemOn(stack, asState(), level, player, hand, hit);
         if (result != null) {
             cir.setReturnValue(result);
@@ -34,6 +37,9 @@ public abstract class BlockStateBaseMixin {
     @Inject(method = "useWithoutItem", at = @At("HEAD"), cancellable = true)
     private void bread$useWithoutItem(Level level, Player player, BlockHitResult hit,
                                       CallbackInfoReturnable<InteractionResult> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         InteractionResult result = BlockTweaks.useWithoutItem(asState(), level, player, hit);
         if (result != null) {
             cir.setReturnValue(result);
@@ -43,6 +49,9 @@ public abstract class BlockStateBaseMixin {
     @Inject(method = "useWithoutItem", at = @At("RETURN"))
     private void bread$afterUse(Level level, Player player, BlockHitResult hit,
                                 CallbackInfoReturnable<InteractionResult> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         if (asState().getBlock() instanceof DoorBlock && cir.getReturnValue().consumesAction()) {
             BlockTweaks.afterDoorToggled(level, player, hit.getBlockPos());
         }

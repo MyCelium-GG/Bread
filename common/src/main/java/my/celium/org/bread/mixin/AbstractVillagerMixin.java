@@ -12,6 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class AbstractVillagerMixin {
     @Inject(method = "canBeLeashed", at = @At("HEAD"), cancellable = true)
     private void bread$canBeLeashed(CallbackInfoReturnable<Boolean> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         if (BreadMod.on(BreadMod.leashVillagers)) {
             cir.setReturnValue(true);
         }

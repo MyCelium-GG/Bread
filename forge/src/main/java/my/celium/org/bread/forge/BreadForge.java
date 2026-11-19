@@ -15,6 +15,16 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 @Mod(BreadMod.ID)
 public final class BreadForge {
     public BreadForge(@SuppressWarnings("unused") FMLJavaModLoadingContext context) {
+        if (!net.minecraftforge.fml.ModList.isLoaded("mycel")) {
+            my.celium.org.bread.MissingMycel.logOnce();
+            net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent.BUS.addListener(event -> {
+                if (event.getEntity() instanceof net.minecraft.server.level.ServerPlayer player) {
+                    my.celium.org.bread.MissingMycel.tell(player);
+                }
+            });
+            return;
+        }
+        my.celium.org.bread.ModGate.open();
         BreadMod.init();
         if (FMLEnvironment.dist == Dist.CLIENT) {
             ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,

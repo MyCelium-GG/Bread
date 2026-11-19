@@ -19,6 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class SnowGolemMixin {
     @Inject(method = "mobInteract", at = @At("HEAD"), cancellable = true)
     private void bread$putPumpkinBack(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+        if (!my.celium.org.bread.ModGate.on()) {
+            return;
+        }
         SnowGolem golem = (SnowGolem) (Object) this;
         ItemStack stack = player.getItemInHand(hand);
         if (!stack.is(Items.CARVED_PUMPKIN) || golem.hasPumpkin() || !BreadMod.on(BreadMod.snowGolemPumpkin)) {

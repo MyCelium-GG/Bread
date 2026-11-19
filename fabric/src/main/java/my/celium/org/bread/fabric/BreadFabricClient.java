@@ -15,6 +15,9 @@ import net.minecraft.resources.Identifier;
 public final class BreadFabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        if (!net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("mycel")) {
+            return;
+        }
         HudElementRegistry.addLast(Identifier.fromNamespaceAndPath(BreadMod.ID, "fps_counter"),
                 (gfx, tracker) -> FpsCounter.render(gfx));
         KeyMappingHelper.registerKeyMapping(Zoom.KEY);
